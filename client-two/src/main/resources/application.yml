@@ -7,7 +7,10 @@ spring:
     username: springcloud
     password: 123456
     publisher-confirms: true
+    # virtual-host:
 eureka:
   client:
     service-url:
       default-zone: http://localhost:8071
+server:
+  port: 8082

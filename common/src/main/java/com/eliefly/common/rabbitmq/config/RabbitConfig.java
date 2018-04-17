@@ -26,17 +26,17 @@ public class RabbitConfig {
      * @return 队列
      */
     @Bean
-    Queue ClientOneQueue() {
+    Queue clientOneQueue() {
         return new Queue(RabbitMQConstants.CLIENT_ONE_QUEUE, true);
     }
 
     @Bean
-    Queue ClientTwoQueue() {
+    Queue clientTwoQueue() {
         return new Queue(RabbitMQConstants.CLIENT_TWO_QUEUE, true);
     }
 
     @Bean
-    Queue ClientThreeQueue() {
+    Queue clientThreeQueue() {
         return new Queue(RabbitMQConstants.CLIENT_THREE_QUEUE, true);
     }
 
@@ -52,7 +52,7 @@ public class RabbitConfig {
     }
 
     /**
-     * 绑定客户端组件队列到交换机
+     * 绑定客户端组件队列到交换机, clientOneQueue 对应上面定义的Queue.
      */
     @Bean
     Binding bindingClientOneQueue2exchange(Queue clientOneQueue, FanoutExchange fanoutExchange) {

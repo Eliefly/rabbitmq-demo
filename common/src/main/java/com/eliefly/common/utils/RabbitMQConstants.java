@@ -13,4 +13,6 @@ public interface RabbitMQConstants {
     String CLIENT_TWO_QUEUE = "client_two_queue";
     String CLIENT_THREE_QUEUE = "client_three_queue";
 
+    String ACTION_TYPE = "action_type";
+
 }
