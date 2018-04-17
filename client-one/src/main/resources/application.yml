@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: client-one
+  rabbitmq:
+    host: localhost
+    port: 5671
+    username: springcloud
+    password: 123456
+    publisher-confirms: true
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8071

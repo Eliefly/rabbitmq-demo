@@ -1,0 +1,12 @@
+server:
+  port: 8071
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false  # 关闭保护机制，剔除不可用的实例
