@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan("com.eliefly")
+@ComponentScan(basePackages = "com.eliefly")
 public class ClientOneApplication {
 
     public static void main(String[] args) {

@@ -2,11 +2,11 @@ server:
   port: 8071
 eureka:
   instance:
-    hostname: localhost
+    hostname: 127.0.0.1
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
-    enable-self-preservation: false  # 关闭保护机制，剔除不可用的实例
+    enable-self-preservation: false
