@@ -1,15 +1,20 @@
+server:
+  port: 8083
 spring:
   application:
-    name: client-three
+    name: client-three-service
   rabbitmq:
     host: localhost
     port: 5671
     username: springcloud
     password: 123456
     publisher-confirms: true
+
 eureka:
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 2
+    leaseExpirationDurationInSeconds: 6
   client:
     service-url:
-      default-zone: http://localhost:8071
-server:
-  port: 8083
+      default-zone: http://${EUREKA_SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:8761}/eureka/

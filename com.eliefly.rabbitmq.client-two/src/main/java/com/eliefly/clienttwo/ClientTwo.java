@@ -7,10 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan("com.eliefly")
-public class ClientTwoApplication {
+@ComponentScan(basePackages = "com.eliefly")
+public class ClientTwo {
 
     public static void main(String[] args) {
-        SpringApplication.run(ClientTwoApplication.class, args);
+        SpringApplication.run(ClientTwo.class, args);
     }
 }

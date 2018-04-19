@@ -1,12 +1,12 @@
 server:
-  port: 8071
+  port: ${EUREKA_SERVER_PORT:8761}
 eureka:
   instance:
-    hostname: 127.0.0.1
+    hostname: ${EUREKA_SERVER_HOST:localhost}
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  server:
-    enable-self-preservation: false
+      defaultZone: http://${EUREKA_SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:8761}/eureka/
+#  server:
+#    enable-self-preservation: false
