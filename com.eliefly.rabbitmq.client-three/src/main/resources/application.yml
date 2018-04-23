@@ -4,11 +4,12 @@ spring:
   application:
     name: client-three-service
   rabbitmq:
-    host: localhost
-    port: 5671
+    host: 127.0.0.1
+    port: 5672
     username: springcloud
     password: 123456
     publisher-confirms: true
+    virtual-host: huangfl
 
 eureka:
   instance:
