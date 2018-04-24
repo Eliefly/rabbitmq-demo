@@ -4,11 +4,13 @@ import com.eliefly.common.rabbitmq.producer.IMqProducer;
 import com.eliefly.common.utils.RabbitMQConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -25,13 +27,18 @@ public class ClientOneController {
     @Autowired
     IMqProducer iMqProducer;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello() {
-        String msg = "hello, i am client one";
+        String msg = "hello, i am client one" + "-----" + new Date();
         // 发送消息
         HashMap<String, Object> header = new HashMap<>();
         header.put(RabbitMQConstants.ACTION_TYPE, RabbitMQConstants.ACTION_ONE_HELLO);
         iMqProducer.sendMessage(header, msg);
+        // rabbitTemplate.convertAndSend(msg);
+
         LOGGER.info("send message: {} success", msg);
         return msg;
     }
