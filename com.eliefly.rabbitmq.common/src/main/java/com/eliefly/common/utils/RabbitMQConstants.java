@@ -8,10 +8,14 @@ package com.eliefly.common.utils;
  */
 public interface RabbitMQConstants {
 
-    // 交换机
+    /**
+     * 交换机
+     */
     String FANOUT_EXCHANGE = "FANOUT_EXCHANGE";
 
-    // 队列
+    /**
+     * 队列
+     */
     String CLIENT_ONE_QUEUE = "client_one_queue";
     String CLIENT_TWO_QUEUE = "client_two_queue";
     String CLIENT_THREE_QUEUE = "client_three_queue";

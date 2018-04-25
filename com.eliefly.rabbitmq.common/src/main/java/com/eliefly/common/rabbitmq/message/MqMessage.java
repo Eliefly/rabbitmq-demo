@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class MqMessage implements Serializable {
 
+    private static final long serialVersionUID = -1L;
+
     private Object body;
     private Map<String, Object> header = new HashMap<>();
 
