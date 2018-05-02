@@ -25,7 +25,7 @@ public class ClientOneController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientOneController.class);
 
     @Autowired
-    IMqProducer iMqProducer;
+    IMqProducer mqProducer;
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -36,8 +36,7 @@ public class ClientOneController {
         // 发送消息
         HashMap<String, Object> header = new HashMap<>();
         header.put(RabbitMQConstants.ACTION_TYPE, RabbitMQConstants.ACTION_ONE_HELLO);
-        iMqProducer.sendMessage(header, msg);
-        // rabbitTemplate.convertAndSend(msg);
+        mqProducer.sendMessage(header, msg);
 
         LOGGER.info("send message: {} success", msg);
         return msg;

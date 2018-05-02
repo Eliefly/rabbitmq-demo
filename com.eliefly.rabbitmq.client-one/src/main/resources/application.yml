@@ -18,3 +18,6 @@ eureka:
   client:
     service-url:
       default-zone: http://${EUREKA_SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:8761}/eureka/
+
+logging:
+  level: debug

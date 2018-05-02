@@ -1,7 +1,11 @@
 package com.eliefly.common.rabbitmq.config;
 
 import com.eliefly.common.utils.RabbitMQConstants;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -17,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2018-04-16
  */
 @Configuration
-//@EnableRabbit
+@EnableRabbit
 public class RabbitConfig {
 
     /**
@@ -89,14 +93,6 @@ public class RabbitConfig {
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
         factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
-        /*factory.setDefaultRequeueRejected(false);//消息接收异常时禁用拒绝策略
-            factory.setAdviceChain(new Advice[] {
-            RetryInterceptorBuilder
-                        .stateless()
-                        .maxAttempts(5)
-                        .backOffOptions(1000, 2, 5000)
-                        .build()
-        });*/
         return factory;
     }
 }

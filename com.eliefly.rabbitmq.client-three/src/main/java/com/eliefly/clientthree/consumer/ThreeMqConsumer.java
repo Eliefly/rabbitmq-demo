@@ -2,11 +2,8 @@ package com.eliefly.clientthree.consumer;
 
 import com.eliefly.common.rabbitmq.message.MqMessage;
 import com.eliefly.common.utils.RabbitMQConstants;
-import com.rabbitmq.client.AMQP;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.support.AmqpHeaders;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,11 +22,11 @@ public class ThreeMqConsumer {
      * @param message 消息
      */
     @RabbitHandler
-    public void receiveMessage(MqMessage message, AMQP.Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
+    public void receiveMessage(MqMessage message) {
 
         String headerType = (String) message.getHeader().get(RabbitMQConstants.ACTION_TYPE);
 
-        if (headerType.equals(message.getHeader().get(RabbitMQConstants.ACTION_ONE_HELLO))) {
+        if (RabbitMQConstants.ACTION_ONE_HELLO.equals(headerType)) {
             processOneAddMessage(message);
         }
     }

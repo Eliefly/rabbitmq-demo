@@ -13,10 +13,10 @@ import java.util.Map;
 
 public class MqMessage implements Serializable {
 
-    private static final long serialVersionUID = -1L;
+    private static final long serialVersionUID = 1L;
 
     private Object body;
-    private Map<String, Object> header = new HashMap<>();
+    private HashMap<String, Object> header = new HashMap<>();
 
     public Object getBody() {
         return body;
@@ -26,8 +26,8 @@ public class MqMessage implements Serializable {
         this.body = body;
     }
 
-    public Map<String, Object> getHeader() {
-        return header;
+    public HashMap<String, Object> getHeader() {
+        return this.header;
     }
 
     public void setHeader(Map<String, Object> header) {
