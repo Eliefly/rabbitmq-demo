@@ -35,7 +35,7 @@ public class TwoMqConsumer {
 
     private void processOneAddMessage(MqMessage message) {
         String msg = (String) message.getBody();
-        LOGGER.info("client two recevie: {}", msg);
+        LOGGER.debug("client two recevie: {}", msg);
     }
 
 }

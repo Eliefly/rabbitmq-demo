@@ -11,6 +11,18 @@ spring:
     virtual-host: huangfl
     # publisher-confirms: true
 
+ribbon:
+  ReadTimeout: 600000
+  ConnectTimeout: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -21,4 +33,8 @@ eureka:
       default-zone: http://${EUREKA_SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:8761}/eureka/
 
 logging:
-  level: debug
+  file: ../logs/client_two.log
+  level:
+    feign: DEBUG
+    com:
+      eliefly: DEBUG

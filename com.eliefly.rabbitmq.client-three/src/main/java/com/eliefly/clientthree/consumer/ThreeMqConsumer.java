@@ -2,6 +2,8 @@ package com.eliefly.clientthree.consumer;
 
 import com.eliefly.common.rabbitmq.message.MqMessage;
 import com.eliefly.common.utils.RabbitMQConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,9 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener(queues = RabbitMQConstants.CLIENT_THREE_QUEUE)
 public class ThreeMqConsumer {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThreeMqConsumer.class);
+
 
     /**
      * 消息接受
@@ -33,7 +38,8 @@ public class ThreeMqConsumer {
 
     private void processOneAddMessage(MqMessage message) {
         String msg = (String) message.getBody();
-        System.out.println("client three recevie: " + msg);
+        LOGGER.debug("client three recevie: {}", msg);
+
     }
 
 }

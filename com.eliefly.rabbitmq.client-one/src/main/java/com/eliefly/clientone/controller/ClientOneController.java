@@ -38,7 +38,7 @@ public class ClientOneController {
         header.put(RabbitMQConstants.ACTION_TYPE, RabbitMQConstants.ACTION_ONE_HELLO);
         mqProducer.sendMessage(header, msg);
 
-        LOGGER.info("send message: {} success", msg);
+        LOGGER.debug("send message: {} success", msg);
         return msg;
     }
 }
