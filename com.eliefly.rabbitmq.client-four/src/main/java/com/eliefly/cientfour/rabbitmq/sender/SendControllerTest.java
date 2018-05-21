@@ -27,13 +27,13 @@ public class SendControllerTest {
 
     @RequestMapping(value = "/send/test1", method = RequestMethod.GET)
     public void send01() {
-        clientFourRabbitTemplate.convertAndSend(MqConsts.TOPIC_EXCHANGE, "four_test1", "hello world 1" + new Date());
+        clientFourRabbitTemplate.convertAndSend(MqConsts.TOPIC_EXCHANGE, "four.test1", "hello world 1" + new Date());
         LOGGER.debug("send hello world success.");
     }
 
     @RequestMapping(value = "/send/test2", method = RequestMethod.GET)
     public void send02() {
-        clientFourRabbitTemplate.convertAndSend(MqConsts.TOPIC_EXCHANGE, "four_test2", "hello world 2" + new Date());
+        clientFourRabbitTemplate.convertAndSend(MqConsts.TOPIC_EXCHANGE, "four.test2", "hello world 2" + new Date());
         LOGGER.debug("send hello world success.");
     }
 }

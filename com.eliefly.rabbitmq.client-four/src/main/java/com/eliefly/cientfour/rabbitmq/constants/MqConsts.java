@@ -12,6 +12,6 @@ public class MqConsts {
 
     public static final String FOUR_QUEUE = "four_queue";
 
-    public static final String ROUT_KEY_PATTERN = "four.*";
+    public static final String ROUT_KEY_PATTERN = "four.#";
 
 }

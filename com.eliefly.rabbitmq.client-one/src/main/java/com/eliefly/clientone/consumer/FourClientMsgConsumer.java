@@ -22,7 +22,8 @@ public class FourClientMsgConsumer {
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "testQueue", durable = "true"),
-            exchange = @Exchange(value = "topic_exchange"),
+            exchange = @Exchange(value = "topic_exchange", type = "topic", durable = "true",
+                    ignoreDeclarationExceptions = "true"),
             key = "four.test1")
     )
     public void receiveMessage(Message message, Channel channel) throws Exception {

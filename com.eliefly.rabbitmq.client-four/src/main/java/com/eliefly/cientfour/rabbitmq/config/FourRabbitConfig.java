@@ -1,11 +1,13 @@
 package com.eliefly.cientfour.rabbitmq.config;
 
 import com.eliefly.cientfour.rabbitmq.constants.MqConsts;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -65,21 +67,21 @@ public class FourRabbitConfig {
 //        return container;
 //    }
 
-//    @Bean
-//    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory1(ConnectionFactory connectionFactory) {
-//        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-//        factory.setConnectionFactory(connectionFactory);
-//        // 消息转换器，接收方 @RabbitListener
-//        factory.setMessageConverter(new Jackson2JsonMessageConverter());
-//        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
-//        /*factory.setDefaultRequeueRejected(false);//消息接收异常时禁用拒绝策略
-//        factory.setAdviceChain(new Advice[] {
-//                RetryInterceptorBuilder
-//                .stateless()
-//                .maxAttempts(5)
-//                .backOffOptions(1000, 2, 5000)
-//                .build()
-//        });*/
-//        return factory;
-//    }
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory1(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        // 消息转换器，接收方 @RabbitListener
+        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        /*factory.setDefaultRequeueRejected(false);//消息接收异常时禁用拒绝策略
+        factory.setAdviceChain(new Advice[] {
+                RetryInterceptorBuilder
+                .stateless()
+                .maxAttempts(5)
+                .backOffOptions(1000, 2, 5000)
+                .build()
+        });*/
+        return factory;
+    }
 }
