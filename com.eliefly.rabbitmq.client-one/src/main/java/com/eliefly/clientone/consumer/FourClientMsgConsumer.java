@@ -32,4 +32,17 @@ public class FourClientMsgConsumer {
         LOGGER.debug("receivedRoutingKey: {}", receivedRoutingKey);
         LOGGER.debug("message: {}", message);
     }
+
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = "testQueue2", durable = "true"),
+            exchange = @Exchange(value = "topic_exchange", type = "topic", durable = "true",
+                    ignoreDeclarationExceptions = "true"),
+            key = "four.test2")
+    )
+    public void receiveMessage2(Message message, Channel channel) throws Exception {
+
+        String receivedRoutingKey = message.getMessageProperties().getReceivedRoutingKey();
+        LOGGER.debug("receivedRoutingKey: {}", receivedRoutingKey);
+        LOGGER.debug("message: {}", message);
+    }
 }
