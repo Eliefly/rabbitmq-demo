@@ -68,7 +68,7 @@ public class FourRabbitConfig {
 //    }
 
     @Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory1(ConnectionFactory connectionFactory) {
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         // 消息转换器，接收方 @RabbitListener
