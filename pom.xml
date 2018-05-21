@@ -50,6 +50,7 @@
         <module>com.eliefly.rabbitmq.client-three</module>
         <module>com.eliefly.rabbitmq.common</module>
         <module>com.eliefly.rabbitmq.eureka-server</module>
+        <module>com.eliefly.rabbitmq.client-four</module>
     </modules>
 
 </project>
