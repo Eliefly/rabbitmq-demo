@@ -11,7 +11,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * DimpMsgConsumer
+ * 监听消费 client-four 发出的消息。（topic_exchange + routingKey）
  *
  * @author huangfl
  * @since 2018/5/21

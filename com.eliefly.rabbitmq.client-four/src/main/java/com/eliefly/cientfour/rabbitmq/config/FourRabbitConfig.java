@@ -14,6 +14,12 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * TopicExchange 方式的消息配置
+ *
+ * @author huangfl
+ * @since 2018/5/21
+ */
 @Configuration
 @EnableRabbit
 public class FourRabbitConfig {
@@ -30,7 +36,7 @@ public class FourRabbitConfig {
     /**
      * TopicExchange
      *
-     * @return 扇形交换机
+     * @return
      */
     @Bean
     TopicExchange topicExchange() {

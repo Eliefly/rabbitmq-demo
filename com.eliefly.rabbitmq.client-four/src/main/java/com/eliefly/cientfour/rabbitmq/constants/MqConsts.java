@@ -8,10 +8,16 @@ package com.eliefly.cientfour.rabbitmq.constants;
  */
 public class MqConsts {
 
-    public static final String TOPIC_EXCHANGE = "topic_exchange";
+    public static final String TOPIC_EXCHANGE = "TOPIC_EXCHANGE";
 
-    public static final String FOUR_QUEUE = "four_queue";
+    /**
+     * 队列名
+     */
+    public static final String FOUR_QUEUE = "four.client";
 
+    /**
+     * routingKey 匹配模式
+     */
     public static final String ROUT_KEY_PATTERN = "four.#";
 
 }
