@@ -22,8 +22,8 @@ public class FourClientMsgConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(FourClientMsgConsumer.class);
 
     @RabbitListener(bindings = @QueueBinding(
-            exchange = @Exchange(value = ClientFourMqConsts.CLIENT_FOUR_TOPIC_EXCHANGE, type = "topic", durable = "true"),
             value = @Queue(value = ClientFourMqConsts.TOPIC_ONE, durable = "true"),
+            exchange = @Exchange(value = ClientFourMqConsts.CLIENT_FOUR_TOPIC_EXCHANGE, type = "topic", durable = "true"),
             key = ClientFourMqConsts.TOPIC_ONE)
     )
     public void receiveMessage(Message message, Channel channel) throws Exception {
@@ -33,15 +33,15 @@ public class FourClientMsgConsumer {
         LOGGER.debug("message: {}", message);
     }
 
-//    @RabbitListener(bindings = @QueueBinding(
-//            value = @Queue(value = "testQueue2", durable = "true"),
-//            exchange = @Exchange(value = ClientFourMqConsts.CLIENT_FOUR_TOPIC_EXCHANGE, type = "topic",
-//                    durable = "true", ignoreDeclarationExceptions = "true"), key = "four.test2")
-//    )
-//    public void receiveMessage2(Message message, Channel channel) throws Exception {
-//
-//        String receivedRoutingKey = message.getMessageProperties().getReceivedRoutingKey();
-//        LOGGER.debug("receivedRoutingKey: {}", receivedRoutingKey);
-//        LOGGER.debug("message: {}", message);
-//    }
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = ClientFourMqConsts.TOPIC_TWO, durable = "true"),
+            exchange = @Exchange(value = ClientFourMqConsts.CLIENT_FOUR_TOPIC_EXCHANGE, type = "topic",
+                    durable = "true", ignoreDeclarationExceptions = "true"), key = ClientFourMqConsts.TOPIC_TWO)
+    )
+    public void receiveMessage2(Message message, Channel channel) throws Exception {
+
+        String receivedRoutingKey = message.getMessageProperties().getReceivedRoutingKey();
+        LOGGER.debug("receivedRoutingKey: {}", receivedRoutingKey);
+        LOGGER.debug("message: {}", message);
+    }
 }

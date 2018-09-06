@@ -1,9 +1,6 @@
 package com.eliefly.cientfour.rabbitmq.config;
 
 import com.eliefly.common.clientfour.ClientFourMqConsts;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -22,15 +19,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableRabbit
 public class FourRabbitConfig {
-    /**
-     * clientFour 消费队列
-     *
-     * @return 队列
-     */
-    @Bean
-    Queue fourQueue() {
-        return new Queue(ClientFourMqConsts.FOUR_QUEUE, true);
-    }
 
     /**
      * TopicExchange
@@ -40,18 +28,6 @@ public class FourRabbitConfig {
     @Bean
     TopicExchange topicExchange() {
         return new TopicExchange(ClientFourMqConsts.CLIENT_FOUR_TOPIC_EXCHANGE, true, false);
-    }
-
-    /**
-     * 绑定基础组件消费队列到交换机
-     *
-     * @param fourQueue     消息队列
-     * @param topicExchange 直通交换机
-     * @return 配置结果
-     */
-    @Bean
-    Binding bindingFourQueue2Exchange(Queue fourQueue, TopicExchange topicExchange) {
-        return BindingBuilder.bind(fourQueue).to(topicExchange).with(ClientFourMqConsts.ROUT_KEY_PATTERN);
     }
 
     @Bean
