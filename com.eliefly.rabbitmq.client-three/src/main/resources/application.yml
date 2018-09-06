@@ -4,12 +4,12 @@ spring:
   application:
     name: client-three-service
   rabbitmq:
-    host: localhost
+    host: 119.29.92.209
     port: 5672
     username: springcloud
     password: 123456
     publisher-confirms: true
-    virtual-host: huangfl
+    virtual-host: test-vh2
 
 ribbon:
   ReadTimeout: 600000

@@ -1,4 +1,4 @@
-package com.eliefly.clienttwo.consumer;
+package com.eliefly.cientfour.consumer;
 
 import com.eliefly.common.rabbitmq.message.MqMessage;
 import com.eliefly.common.rabbitmq.config.RabbitMQConstants;
@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
  * @date 2018-04-19
  */
 @Component
-public class TwoMqConsumer {
+public class FourMqConsumer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TwoMqConsumer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FourMqConsumer.class);
 
     /**
      * 消息接受
@@ -35,7 +35,8 @@ public class TwoMqConsumer {
 
     private void processOneAddMessage(MqMessage message) {
         String msg = (String) message.getBody();
-        LOGGER.debug("client two recevie: {}", msg);
-    }
+        LOGGER.debug("client four recevie: {}", msg);
 
+
+    }
 }

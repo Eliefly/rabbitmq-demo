@@ -37,3 +37,19 @@ logging:
     feign: DEBUG
     com:
       eliefly: DEBUG
+
+# 自定以配置多个 rabbitmq 连接
+customize:
+  rabbitmq:
+    enabled: true
+    connections:
+      - host: 119.29.92.209
+        port: 5672
+        username: springcloud
+        password: 123456
+        virtual-host: test-vh1
+      - host: 119.29.92.209
+        port: 5672
+        username: springcloud
+        password: 123456
+        virtual-host: test-vh2

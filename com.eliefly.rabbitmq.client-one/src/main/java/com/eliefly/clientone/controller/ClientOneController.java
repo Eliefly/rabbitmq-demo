@@ -1,7 +1,7 @@
 package com.eliefly.clientone.controller;
 
 import com.eliefly.common.rabbitmq.producer.IMqProducer;
-import com.eliefly.common.utils.RabbitMQConstants;
+import com.eliefly.common.rabbitmq.config.RabbitMQConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -27,10 +28,10 @@ public class ClientOneController {
     @Autowired
     IMqProducer mqProducer;
 
-    @Autowired
+    @Resource(name = "rabbitTemplate")
     private RabbitTemplate rabbitTemplate;
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @RequestMapping(value = "/one/hello", method = RequestMethod.GET)
     public String hello() {
         String msg = "hello, i am client one" + "-----" + new Date();
         // 发送消息

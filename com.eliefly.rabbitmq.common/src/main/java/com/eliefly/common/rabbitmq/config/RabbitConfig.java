@@ -1,6 +1,5 @@
 package com.eliefly.common.rabbitmq.config;
 
-import com.eliefly.common.utils.RabbitMQConstants;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -8,11 +7,18 @@ import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * RabbitConfig
@@ -21,13 +27,16 @@ import org.springframework.context.annotation.Configuration;
  * @date 2018-04-16
  */
 @Configuration
-@EnableRabbit
+//@EnableRabbit
 public class RabbitConfig {
+
+    @Autowired
+    private RabbitProperties rabbitProperties;
 
     /**
      * 构建队列，名称，是否持久化之类
      *
-     * @return 队列
+     * @return 队列r
      */
     @Bean
     Queue clientOneQueue() {
@@ -42,6 +51,11 @@ public class RabbitConfig {
     @Bean
     Queue clientThreeQueue() {
         return new Queue(RabbitMQConstants.CLIENT_THREE_QUEUE, true);
+    }
+
+    @Bean
+    Queue clientFourQueue() {
+        return new Queue(RabbitMQConstants.CLIENT_FOUR_QUEUE, true);
     }
 
     /**
@@ -73,6 +87,23 @@ public class RabbitConfig {
         return BindingBuilder.bind(clientThreeQueue).to(fanoutExchange);
     }
 
+    @Bean
+    Binding bindingClientFourQueue2exchange(Queue clientFourQueue, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(clientFourQueue).to(fanoutExchange);
+    }
+
+    @Bean
+    @Primary
+    public CachingConnectionFactory springConnectionFactory() {
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+        connectionFactory.setHost(rabbitProperties.getHost());
+        connectionFactory.setPort(rabbitProperties.getPort());
+        connectionFactory.setUsername(rabbitProperties.getUsername());
+        connectionFactory.setPassword(rabbitProperties.getPassword());
+        connectionFactory.setVirtualHost(rabbitProperties.getVirtualHost());
+        return connectionFactory;
+    }
+
     /**
      * RabbitTemplate，用来发送消息
      *
@@ -80,19 +111,40 @@ public class RabbitConfig {
      * @return RabbitTemplate
      */
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+    public RabbitTemplate rabbitTemplate(@Qualifier("springConnectionFactory") ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.setMessageConverter(new Jackson2JsonMessageConverter());
         template.setExchange(RabbitMQConstants.FANOUT_EXCHANGE);
         return template;
     }
 
-    @Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+    @Bean("rabbitListenerContainerFactory")
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory
+            (@Qualifier("springConnectionFactory") ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
-        // factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        /*
+        添加了配置 acknowledge="auto"，这里来配置mq的确认机制，auto 自动确认，这也是默认缺省的配置。
+        特点：消费者挂掉，待ack的消息回归到队列中。消费者抛出异常，消息会不断的被重发，直到处理成功。
+        不会丢失消息，即便服务挂掉，没有处理完成的消息会重回队列，但是异常会让消息不断重试。
+         */
+        factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
         return factory;
     }
+
+//    @Bean
+//    public SimpleMessageListenerContainer messageListenerContainer
+//            (@Qualifier("springConnectionFactory") ConnectionFactory connectionFactory) {
+//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+//        container.setConnectionFactory(connectionFactory);
+//        container.setMessageConverter(new Jackson2JsonMessageConverter());
+//        return container;
+//    }
+//
+//    @Bean
+//    public RabbitAdmin rabbitAdmin(@Qualifier("springConnectionFactory") ConnectionFactory connectionFactory) {
+//        return new RabbitAdmin(connectionFactory);
+//    }
+
 }
