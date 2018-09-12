@@ -1,12 +1,11 @@
 package com.eliefly.clientone.rabbitmq.multiple.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 
 /**
- * CustomizeRabbitmqPro
+ * MultipleRabbitProperties
  *
  * @author huangfl
  * @since 2018/8/31

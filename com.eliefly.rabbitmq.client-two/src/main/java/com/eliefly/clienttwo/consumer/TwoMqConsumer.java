@@ -1,7 +1,7 @@
 package com.eliefly.clienttwo.consumer;
 
-import com.eliefly.common.rabbitmq.message.MqMessage;
 import com.eliefly.common.rabbitmq.config.RabbitMQConstants;
+import com.eliefly.common.rabbitmq.message.MqMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

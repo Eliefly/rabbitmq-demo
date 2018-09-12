@@ -1,9 +1,7 @@
 package com.eliefly.clientone.rabbitmq.multiple.config;
 
 import com.eliefly.common.clientone.TransferMqConsts;
-import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.SimpleRoutingConnectionFactory;
