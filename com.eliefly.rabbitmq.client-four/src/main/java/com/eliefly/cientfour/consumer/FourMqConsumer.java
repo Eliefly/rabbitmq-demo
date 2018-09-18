@@ -1,14 +1,14 @@
 package com.eliefly.cientfour.consumer;
 
-import com.eliefly.common.rabbitmq.message.MqMessage;
 import com.eliefly.common.rabbitmq.config.RabbitMQConstants;
+import com.eliefly.common.rabbitmq.message.MqMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * TwoMqConsumer
+ * FourMqConsumer
  *
  * @author eliefly
  * @date 2018-04-19
@@ -23,7 +23,7 @@ public class FourMqConsumer {
      *
      * @param message 消息
      */
-    @RabbitListener(queues = RabbitMQConstants.CLIENT_TWO_QUEUE)
+    @RabbitListener(queues = RabbitMQConstants.CLIENT_FOUR_QUEUE)
     public void receiveMessage(MqMessage message) {
 
         String headerType = (String) message.getHeader().get(RabbitMQConstants.ACTION_TYPE);
@@ -36,7 +36,6 @@ public class FourMqConsumer {
     private void processOneAddMessage(MqMessage message) {
         String msg = (String) message.getBody();
         LOGGER.debug("client four recevie: {}", msg);
-
 
     }
 }
